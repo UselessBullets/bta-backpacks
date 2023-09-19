@@ -1,6 +1,6 @@
-# Example Mod
+# Better with Backpacks!
 
-Template for making Babric mods for BTA!
+Better with Backpacks! is a simple mod for Better than Adventure! that adds... backpacks.
 
 **Note: *DO NOT fork this repository unless you want to contribute!***
 
