@@ -4,7 +4,6 @@ package tosutosu.betterwithbackpacks.crafting;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.crafting.CraftingManager;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.RecipeHelper;
 
