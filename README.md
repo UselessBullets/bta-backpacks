@@ -9,6 +9,7 @@ Better with Backpacks! is a WIP. No functionally has been implemented yet.
 ## Contributing
 
 If you wish to contribute to the mod, please message me in the 'BTA Modding' Discord thread first.
+
 Link: https://discord.com/channels/1138825919088312403/1154171619967762462
 
 ## Current requirements
