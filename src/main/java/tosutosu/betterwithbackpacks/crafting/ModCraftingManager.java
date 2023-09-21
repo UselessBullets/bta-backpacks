@@ -39,21 +39,4 @@ public abstract class ModCraftingManager {
 
         BetterWithBackpacks.LOGGER.info("Better with Backpacks! recipes loaded successfully."); //put recipes before this point
     }
-
-
-    private static void addAlternatives(int index, Block[] alternatives) {
-        Block[] current = CraftingManager.blockAlternatives[index];
-        Block[] newAlts = new Block[current.length+alternatives.length];
-        System.arraycopy(current, 0, newAlts, 0, current.length);
-        System.arraycopy(alternatives, 0, newAlts, current.length, alternatives.length);
-        CraftingManager.blockAlternatives[index] = newAlts;
-    }
-
-    private static void appendAlternatives(Block[] alternatives) {
-        Block[][] current = CraftingManager.blockAlternatives;
-        Block[][] newAlts = new Block[current.length+1][];
-        System.arraycopy(current, 0, newAlts, 0, current.length);
-        newAlts[newAlts.length-1] = alternatives;
-        CraftingManager.blockAlternatives = newAlts;
-    }
 }
