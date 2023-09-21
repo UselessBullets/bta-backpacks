@@ -2,15 +2,18 @@
 
 Better with Backpacks! is a simple mod for Better than Adventure! that adds... backpacks.
 
-## Requirements
+## Status
 
-Fabric
+Better with Backpacks! is a WIP. No functionally has been implemented yet.
 
-Halplibe
+## Contributing
 
-## Features
+If you wish to contribute to the mod, please message me in the Discord thread first.
 
-Four! craftable backpacks that currently do absolutely nothing.
+## Current requirements
+
+- Fabric
+- Halplibe
 
 ## When are those going to work?
 
@@ -18,4 +21,5 @@ Once I figure out how to handle containers and gui in Beta Minecraft (that may t
 
 ## Credits
 
-Draylar: for creating INMIS.
+Draylar for creating "INMIS".
+gr8pefish for creating "Iron Backpacks".
