@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
-  "version": "${version}",
+  "id": "betterwithbackpacks",
+  "version": "1.0.0",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Better with Backpacks!",
+  "description": "This mod aims to add simple backpacks to BTA.",
   "authors": [
-    "Turnip Labs"
+    "tosutosu"
   ],
   "contact": {
     "homepage": "",
     "sources": ""
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-        "turniplabs.examplemod.ExampleMod"
+        "tosutosu.betterwithbackpacks.BetterWithBackpacks"
     ]
   },
   "mixins": [
-      "examplemod.mixins.json"
+    "betterwithbackpacks.mixins.json"
   ],
 
   "depends": {
