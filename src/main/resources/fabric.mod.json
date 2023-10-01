@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "betterwithbackpacks",
   "version": "1.0.0",
-
+  "icon": "icon.png",
   "name": "Better with Backpacks!",
   "description": "This mod aims to add simple backpacks to BTA.",
   "authors": [

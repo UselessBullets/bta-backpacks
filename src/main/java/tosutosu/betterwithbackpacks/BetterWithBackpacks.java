@@ -13,16 +13,19 @@ public class BetterWithBackpacks implements ModInitializer {
     public static final String MOD_ID = "betterwithbackpacks";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static int GUI_LABEL_COLOR = 0x404040;
+    public static int GUI_BACKPACK_ID = 10;
 
     private void handleConfig() {
         Properties prop = new Properties();
         prop.setProperty("starting_block_id","2137");
         prop.setProperty("starting_item_id","21370");
+        prop.setProperty("gui_backpack_id","10");
         ConfigHandler config = new ConfigHandler(MOD_ID,prop);
         UtilIdRegistrar.initIds(
                 config.getInt("starting_block_id"),
                 config.getInt("starting_item_id"));
         config.updateConfig();
+        GUI_BACKPACK_ID = config.getInt("gui_backpack_id");
     }
 
     @Override

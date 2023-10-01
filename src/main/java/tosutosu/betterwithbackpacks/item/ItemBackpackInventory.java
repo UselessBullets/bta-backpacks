@@ -2,11 +2,14 @@ package tosutosu.betterwithbackpacks.item;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.packet.Packet134ItemData;
 import net.minecraft.core.player.inventory.IInventory;
 
 public class ItemBackpackInventory implements IInventory {
+    private Minecraft mc = Minecraft.getMinecraft(this);
     private final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
@@ -68,6 +71,9 @@ public class ItemBackpackInventory implements IInventory {
     @Override
     public void onInventoryChanged() {
         writeToNBT(stack.getData());
+        if (this.mc.theWorld.isClientSide) {
+            this.mc.getSendQueue().addToSendQueue(new Packet134ItemData(mc.thePlayer.inventory.currentItem, stack.getData()));
+        }
     }
 
     public void readFromNBT(CompoundTag nbttagcompound) {
