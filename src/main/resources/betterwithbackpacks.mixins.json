@@ -4,6 +4,7 @@
     "package": "tosutosu.betterwithbackpacks.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "MinecraftMixin"
     ],
     "client": [
     ],

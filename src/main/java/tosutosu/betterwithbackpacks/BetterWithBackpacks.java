@@ -4,15 +4,15 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tosutosu.betterwithbackpacks.crafting.ModCraftingManager;
+import tosutosu.betterwithbackpacks.item.ModItems;
 import turniplabs.halplibe.util.ConfigHandler;
-
-import tosutosu.betterwithbackpacks.item.ItemBackpack;
 
 import java.util.Properties;
 
 public class BetterWithBackpacks implements ModInitializer {
     public static final String MOD_ID = "betterwithbackpacks";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static int GUI_LABEL_COLOR = 0x404040;
 
     private void handleConfig() {
         Properties prop = new Properties();
@@ -31,7 +31,7 @@ public class BetterWithBackpacks implements ModInitializer {
         handleConfig();
 
         UtilIdRegistrar.setIdToItem();
-        ItemBackpack.register();
+        ModItems.register();
         UtilIdRegistrar.setIdToBlock();
         ModCraftingManager.register();
 

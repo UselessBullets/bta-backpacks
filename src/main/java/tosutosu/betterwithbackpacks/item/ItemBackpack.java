@@ -1,15 +1,26 @@
 package tosutosu.betterwithbackpacks.item;
 
-import tosutosu.betterwithbackpacks.BetterWithBackpacks;
-import tosutosu.betterwithbackpacks.UtilIdRegistrar;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
-import turniplabs.halplibe.helper.ItemHelper;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
+import tosutosu.betterwithbackpacks.gui.guiscreen.GuiBackpack;
 
-public class ItemBackpack {
-    public static final Item LeatherBackpack = ItemHelper.createItem(BetterWithBackpacks.MOD_ID, new Item(UtilIdRegistrar.nextId()), "leather.backpack", "leather_backpack.png").setMaxStackSize(1);
-    public static final Item IronBackpack = ItemHelper.createItem(BetterWithBackpacks.MOD_ID, new Item(UtilIdRegistrar.nextId()), "iron.backpack", "iron_backpack.png").setMaxStackSize(1);
-    public static final Item GoldBackpack = ItemHelper.createItem(BetterWithBackpacks.MOD_ID, new Item(UtilIdRegistrar.nextId()), "gold.backpack", "gold_backpack.png").setMaxStackSize(1);
-    public static final Item DiamondBackpack = ItemHelper.createItem(BetterWithBackpacks.MOD_ID, new Item(UtilIdRegistrar.nextId()), "diamond.backpack", "diamond_backpack.png").setMaxStackSize(1);
-    public static void register() {
+public class ItemBackpack extends Item{
+    public final int backpackSize;
+    public ItemBackpack(String name, int id) {
+        this(name, id, 9);
+    }
+    public ItemBackpack(String name, int id, int backpackSize) {
+        super(name, id);
+        this.maxStackSize = 1;
+        this.backpackSize = backpackSize;
+    }
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+        Minecraft mc = Minecraft.getMinecraft(this);
+        mc.displayGuiScreen(new GuiBackpack(entityplayer, itemstack));
+        return itemstack;
     }
 }
