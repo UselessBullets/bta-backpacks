@@ -74,6 +74,7 @@ public class ItemBackpackInventory implements IInventory {
         if (this.mc.theWorld.isClientSide) {
             this.mc.getSendQueue().addToSendQueue(new Packet134ItemData(mc.thePlayer.inventory.currentItem, stack.getData()));
         }
+
     }
 
     public void readFromNBT(CompoundTag nbttagcompound) {
@@ -99,6 +100,6 @@ public class ItemBackpackInventory implements IInventory {
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        return false;
+        return stack == entityPlayer.getHeldItem();
     }
 }
