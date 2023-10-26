@@ -3,6 +3,7 @@ package tosutosu.betterwithbackpacks.gui.guiscreen;
 import net.minecraft.client.gui.GuiContainer;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.gui.container.ContainerBackpack;
 
@@ -33,6 +34,7 @@ public class GuiBackpack extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
+        GL11.glColor3d(1d,1d, 1d);
         mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/assets/betterwithbackpacks/gui/backpack.png"));
         drawTexturedModalRect(GUIx, GUIy, 0, 0, this.xSize, this.ySize);
 
