@@ -9,7 +9,7 @@ import net.minecraft.core.net.packet.Packet134ItemData;
 import net.minecraft.core.player.inventory.IInventory;
 
 public class ItemBackpackInventory implements IInventory {
-    private Minecraft mc = Minecraft.getMinecraft(this);
+    private final Minecraft mc = Minecraft.getMinecraft(this);
     private final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
@@ -56,11 +56,7 @@ public class ItemBackpackInventory implements IInventory {
 
     @Override
     public String getInvName() {
-        String name = stack.getCustomName();
-        if (name != null){
-            return name;
-        }
-        return stack.getDisplayName();
+        return "Backpack";
     }
 
     @Override

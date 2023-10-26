@@ -9,6 +9,8 @@ import tosutosu.betterwithbackpacks.gui.container.ContainerBackpack;
 public class GuiBackpack extends GuiContainer {
     private int GUIx;
     private int GUIy;
+    private int rows;
+    private int slotsNum;
     private final ContainerBackpack backpack;
     public GuiBackpack(EntityPlayer player, ItemStack stack) {
         super(new ContainerBackpack(player.inventory, stack));
@@ -19,6 +21,8 @@ public class GuiBackpack extends GuiContainer {
     public void initGui() {
         GUIx = (this.width - this.xSize) / 2;
         GUIy = (this.height - this.ySize) / 2;
+        slotsNum = backpack.backpackInventory.getSizeInventory();
+        rows = (int) Math.ceil(slotsNum/9d);
         super.initGui();
     }
     @Override
@@ -32,8 +36,6 @@ public class GuiBackpack extends GuiContainer {
         mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/assets/betterwithbackpacks/gui/backpack.png"));
         drawTexturedModalRect(GUIx, GUIy, 0, 0, this.xSize, this.ySize);
 
-        int slotsNum = backpack.backpackInventory.getSizeInventory();
-        int rows = (int) Math.ceil(slotsNum/9d);
         for (int i = 0; i < rows; i++) {
             if (i == rows - 1) {
                 drawTexturedModalRect(GUIx + 7,GUIy + 17 + 18 * i, 0, 166, 18 * (slotsNum - (9 * i)), 18);
