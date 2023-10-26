@@ -1,11 +1,14 @@
 package tosutosu.betterwithbackpacks.gui.container;
 
+import net.minecraft.core.Global;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
+import net.minecraft.server.entity.player.EntityPlayerMP;
+import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.gui.slots.SlotBackpack;
 import tosutosu.betterwithbackpacks.item.ItemBackpackInventory;
 
@@ -69,6 +72,12 @@ public class ContainerBackpack extends Container {
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
+        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
+            return false;
+        }
+        if (entityPlayer instanceof EntityPlayerMP){
+            return true; // Fixes server compatibility???
+        }
         return entityPlayer.getHeldItem() == backpack;
     }
 }

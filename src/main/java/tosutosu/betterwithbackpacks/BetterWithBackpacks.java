@@ -14,17 +14,20 @@ public class BetterWithBackpacks implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static int GUI_LABEL_COLOR = 0x404040;
     public static int GUI_BACKPACK_ID = 10;
+    public static boolean ENABLE_BACKPACKS = true;
 
     private void handleConfig() {
         Properties prop = new Properties();
         prop.setProperty("starting_block_id","2137");
         prop.setProperty("starting_item_id","21370");
         prop.setProperty("gui_backpack_id","10");
+        prop.setProperty("enable_backpacks", "true");
         ConfigHandler config = new ConfigHandler(MOD_ID,prop);
         UtilIdRegistrar.initIds(
                 config.getInt("starting_block_id"),
                 config.getInt("starting_item_id"));
         config.updateConfig();
+        ENABLE_BACKPACKS = config.getBoolean("enable_backpacks");
         GUI_BACKPACK_ID = config.getInt("gui_backpack_id");
     }
 
@@ -36,7 +39,10 @@ public class BetterWithBackpacks implements ModInitializer {
         UtilIdRegistrar.setIdToItem();
         ModItems.register();
         UtilIdRegistrar.setIdToBlock();
-        ModCraftingManager.register();
+        if (ENABLE_BACKPACKS){
+            ModCraftingManager.register();
+        }
+
 
         LOGGER.info("Better with Backpacks! initialized.");
     }

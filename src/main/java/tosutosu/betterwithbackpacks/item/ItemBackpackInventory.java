@@ -3,6 +3,7 @@ package tosutosu.betterwithbackpacks.item;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet134ItemData;
@@ -56,7 +57,11 @@ public class ItemBackpackInventory implements IInventory {
 
     @Override
     public String getInvName() {
-        return "Backpack";
+        String name = stack.getCustomName();
+        if (name != null){
+            return name;
+        }
+        return stack.getDisplayName();
     }
 
     @Override
@@ -67,7 +72,7 @@ public class ItemBackpackInventory implements IInventory {
     @Override
     public void onInventoryChanged() {
         writeToNBT(stack.getData());
-        if (this.mc.theWorld.isClientSide) {
+        if (!Global.isServer && mc.theWorld.isClientSide) {
             this.mc.getSendQueue().addToSendQueue(new Packet134ItemData(mc.thePlayer.inventory.currentItem, stack.getData()));
         }
 
