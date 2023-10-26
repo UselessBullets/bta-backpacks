@@ -4,7 +4,7 @@ Better with Backpacks! is a simple mod for Better than Adventure! that adds... b
 
 ## Status
 
-Better with Backpacks! is a WIP. No functionally has been implemented yet.
+Better with Backpacks! Functional in singleplayer!
 
 ## Contributing
 
