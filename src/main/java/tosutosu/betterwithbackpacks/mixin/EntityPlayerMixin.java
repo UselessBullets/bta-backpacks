@@ -8,10 +8,6 @@ import tosutosu.betterwithbackpacks.IPlayerDisplay;
 
 @Mixin(value = EntityPlayer.class, remap = false)
 public class EntityPlayerMixin implements IPlayerDisplay {
-
-    @Unique
-    private EntityPlayer thisAs = (EntityPlayer)(Object)this;
-
     @Override
     public void displayGUIBackpack(ItemStack stack) {
 

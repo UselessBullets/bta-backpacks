@@ -1,6 +1,5 @@
 package tosutosu.betterwithbackpacks.mixin;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet100OpenWindow;
 import net.minecraft.server.entity.player.EntityPlayerMP;
@@ -13,8 +12,6 @@ import tosutosu.betterwithbackpacks.gui.container.ContainerBackpack;
 
 @Mixin(value = EntityPlayerMP.class, remap = false)
 public class EntityPlayerMPMixin implements IPlayerDisplay {
-    @Unique
-    private final Minecraft mc = Minecraft.getMinecraft(this);
     @Unique
     private final EntityPlayerMP thisAs = (EntityPlayerMP)(Object)this;
     @Shadow

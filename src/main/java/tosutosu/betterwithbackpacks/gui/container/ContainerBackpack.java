@@ -1,13 +1,11 @@
 package tosutosu.betterwithbackpacks.gui.container;
 
-import net.minecraft.core.Global;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
-import net.minecraft.server.entity.player.EntityPlayerMP;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.gui.slots.SlotBackpack;
 import tosutosu.betterwithbackpacks.item.ItemBackpackInventory;
@@ -60,7 +58,6 @@ public class ContainerBackpack extends Container {
         }
         return null;
     }
-
     @Override
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
         int chestSize = backpackInventory.getSizeInventory();
@@ -72,12 +69,25 @@ public class ContainerBackpack extends Container {
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
-        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
-            return false;
-        }
-        if (entityPlayer instanceof EntityPlayerMP){
-            return true; // Fixes server compatibility???
-        }
-        return entityPlayer.getHeldItem() == backpack;
+        BetterWithBackpacks.Log("Backpack is backpack");
+        return false;
+//        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
+//            return false;
+//        }
+//        if (entityPlayer.getHeldItem() == null){
+//            BetterWithBackpacks.Log("Backpack is false");
+//            return false;
+//        }
+//        ItemStack heldItem = entityPlayer.getHeldItem();
+//        if (
+//            heldItem.getItem() == backpack.getItem() &&
+//            heldItem.getMetadata() == backpack.getMetadata() &&
+//            heldItem.stackSize == backpack.stackSize)
+//        {
+//            BetterWithBackpacks.Log("Backpack is backpack");
+//            return true;
+//        }
+//        BetterWithBackpacks.Log("Backpack is false");
+//        return false;
     }
 }

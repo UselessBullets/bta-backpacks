@@ -1,6 +1,8 @@
 package tosutosu.betterwithbackpacks;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.Global;
+import net.minecraft.server.net.handler.NetServerHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tosutosu.betterwithbackpacks.crafting.ModCraftingManager;
@@ -45,5 +47,12 @@ public class BetterWithBackpacks implements ModInitializer {
 
 
         LOGGER.info("Better with Backpacks! initialized.");
+    }
+    public static void Log(String message){
+        if (Global.isServer && NetServerHandler.logger != null){
+            NetServerHandler.logger.info(message);
+        } else {
+            LOGGER.info(message);
+        }
     }
 }
