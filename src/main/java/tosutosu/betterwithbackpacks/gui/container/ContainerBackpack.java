@@ -69,25 +69,6 @@ public class ContainerBackpack extends Container {
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
-        BetterWithBackpacks.Log("Backpack is backpack");
-        return false;
-//        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
-//            return false;
-//        }
-//        if (entityPlayer.getHeldItem() == null){
-//            BetterWithBackpacks.Log("Backpack is false");
-//            return false;
-//        }
-//        ItemStack heldItem = entityPlayer.getHeldItem();
-//        if (
-//            heldItem.getItem() == backpack.getItem() &&
-//            heldItem.getMetadata() == backpack.getMetadata() &&
-//            heldItem.stackSize == backpack.stackSize)
-//        {
-//            BetterWithBackpacks.Log("Backpack is backpack");
-//            return true;
-//        }
-//        BetterWithBackpacks.Log("Backpack is false");
-//        return false;
+        return backpackInventory.canInteractWith(entityPlayer);
     }
 }

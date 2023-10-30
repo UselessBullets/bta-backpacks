@@ -8,6 +8,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet134ItemData;
 import net.minecraft.core.player.inventory.IInventory;
+import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 
 public class ItemBackpackInventory implements IInventory {
     private final Minecraft mc = Minecraft.getMinecraft(this);
@@ -101,6 +102,24 @@ public class ItemBackpackInventory implements IInventory {
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-        return stack == entityPlayer.getHeldItem();
+//        BetterWithBackpacks.Log("Backpack is backpack");
+        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
+            return false;
+        }
+        if (entityPlayer.getHeldItem() == null){
+//            BetterWithBackpacks.Log("Backpack is false");
+            return false;
+        }
+        ItemStack heldItem = entityPlayer.getHeldItem();
+        if (
+            heldItem.getItem() == stack.getItem() &&
+            heldItem.getMetadata() == stack.getMetadata() &&
+            heldItem.stackSize == stack.stackSize)
+        {
+//            BetterWithBackpacks.Log("Backpack is backpack");
+            return true;
+        }
+//        BetterWithBackpacks.Log("Backpack is false");
+        return false;
     }
 }
