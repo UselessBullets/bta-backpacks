@@ -1,6 +1,7 @@
 package tosutosu.betterwithbackpacks.crafting;
 
 
+import net.minecraft.core.item.ItemStack;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 import net.minecraft.core.block.Block;
@@ -12,12 +13,18 @@ public abstract class ModCraftingManager {
 
     public static void register() {
         //add recipes
-        RecipeHelper.Crafting.createRecipe(ModItems.LeatherBackpack, 1, new Object[]{
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(ModItems.LeatherBackpack, 1), true, false, new Object[]{
                 "LLL",
                 "LCL",
                 "LLL",
                 'L', Item.leather,
                 'C', Block.chestPlanksOak});
+        RecipeHelper.craftingManager.addRecipe(new ItemStack(ModItems.LeatherBackpack, 1), true, false, new Object[]{
+                "LLL",
+                "LCL",
+                "LLL",
+                'L', Item.leather,
+                'C', Block.chestPlanksOakPainted});
         RecipeHelper.Crafting.createRecipe(ModItems.IronBackpack, 1, new Object[]{
                 "III",
                 "IBI",
