@@ -2,16 +2,15 @@ package tosutosu.betterwithbackpacks.item;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.net.packet.Packet134ItemData;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.InventorySorter;
+import tosutosu.betterwithbackpacks.BackpacksClient;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 
 public class ItemBackpackInventory implements IInventory {
-    private final Minecraft mc = Minecraft.getMinecraft(this);
     private final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
@@ -73,8 +72,8 @@ public class ItemBackpackInventory implements IInventory {
     @Override
     public void onInventoryChanged() {
         writeToNBT(stack.getData());
-        if (!Global.isServer && mc.theWorld.isClientSide) {
-            this.mc.getSendQueue().addToSendQueue(new Packet134ItemData(mc.thePlayer.inventory.currentItem, stack.getData()));
+        if (!Global.isServer) {
+            BackpacksClient.sendStackUpdate(stack.getData());
         }
 
     }
@@ -102,12 +101,10 @@ public class ItemBackpackInventory implements IInventory {
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
-//        BetterWithBackpacks.Log("Backpack is backpack");
         if (!BetterWithBackpacks.ENABLE_BACKPACKS){
             return false;
         }
         if (entityPlayer.getHeldItem() == null){
-//            BetterWithBackpacks.Log("Backpack is false");
             return false;
         }
         ItemStack heldItem = entityPlayer.getHeldItem();
@@ -116,10 +113,13 @@ public class ItemBackpackInventory implements IInventory {
             heldItem.getMetadata() == stack.getMetadata() &&
             heldItem.stackSize == stack.stackSize)
         {
-//            BetterWithBackpacks.Log("Backpack is backpack");
             return true;
         }
-//        BetterWithBackpacks.Log("Backpack is false");
         return false;
+    }
+
+    @Override
+    public void sortInventory() {
+        InventorySorter.sortInventory(backpackItemStacks);
     }
 }

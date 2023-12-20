@@ -19,16 +19,16 @@ public class GuiBackpack extends GuiContainer {
     }
 
     @Override
-    public void initGui() {
+    public void init() {
         GUIx = (this.width - this.xSize) / 2;
         GUIy = (this.height - this.ySize) / 2;
         slotsNum = backpack.backpackInventory.getSizeInventory();
         rows = (int) Math.ceil(slotsNum/9d);
-        super.initGui();
+        super.init();
     }
     @Override
     protected void drawGuiContainerForegroundLayer() {
-        this.fontRenderer.drawString(backpack.backpackInventory.getInvName(), 8, 4, BetterWithBackpacks.GUI_LABEL_COLOR);
+        this.fontRenderer.drawString(backpack.backpackInventory.getInvName(), 8, 6, BetterWithBackpacks.GUI_LABEL_COLOR);
         this.fontRenderer.drawString("Inventory", 8, this.ySize - 96 + 2, BetterWithBackpacks.GUI_LABEL_COLOR);
     }
 

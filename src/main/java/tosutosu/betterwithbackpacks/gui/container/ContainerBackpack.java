@@ -6,7 +6,6 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
-import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.gui.slots.SlotBackpack;
 import tosutosu.betterwithbackpacks.item.ItemBackpackInventory;
 

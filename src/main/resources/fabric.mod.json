@@ -17,8 +17,11 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "beforeGameStart": [
         "tosutosu.betterwithbackpacks.BetterWithBackpacks"
+    ],
+    "recipesReady": [
+      "tosutosu.betterwithbackpacks.ModRecipes"
     ]
   },
   "mixins": [
@@ -27,7 +30,7 @@
 
   "depends": {
     "fabricloader": ">=0.13.3",
-    "halplibe": ">=2.1.1"
+    "halplibe": ">=3.0.3"
   },
   "suggests": {
   }
