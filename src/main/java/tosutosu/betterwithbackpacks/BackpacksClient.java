@@ -7,6 +7,7 @@ import net.minecraft.core.net.packet.Packet134ItemData;
 public class BackpacksClient {
     public static void sendStackUpdate(CompoundTag tag){
         Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
+        if (!mc.theWorld.isClientSide) {return;}
         mc.getSendQueue().addToSendQueue(new Packet134ItemData(mc.thePlayer.inventory.currentItem, tag));
     }
 }
