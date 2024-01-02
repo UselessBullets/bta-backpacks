@@ -21,7 +21,7 @@
         "tosutosu.betterwithbackpacks.BetterWithBackpacks"
     ],
     "recipesReady": [
-      "tosutosu.betterwithbackpacks.ModRecipes"
+      "tosutosu.betterwithbackpacks.crafting.ModRecipes"
     ]
   },
   "mixins": [

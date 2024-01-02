@@ -30,7 +30,7 @@
   },
   {
     "name": "backpacks:workbench/backpack_iron",
-    "type": "minecraft:crafting/shaped",
+    "type": "backpacks:backpack",
     "pattern": [
       "AAA",
       "ABA",
@@ -63,7 +63,7 @@
   },
   {
     "name": "backpacks:workbench/backpack_gold",
-    "type": "minecraft:crafting/shaped",
+    "type": "backpacks:backpack",
     "pattern": [
       "AAA",
       "ABA",
@@ -96,7 +96,7 @@
   },
   {
     "name": "backpacks:workbench/backpack_diamond",
-    "type": "minecraft:crafting/shaped",
+    "type": "backpacks:backpack",
     "pattern": [
       "AAA",
       "ABA",

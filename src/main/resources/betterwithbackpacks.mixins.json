@@ -8,8 +8,8 @@
     "EntityPlayerMPMixin"
   ],
   "client": [
-    "NetClientHandlerMixin",
-    "EntityPlayerSPMixin"
+    "EntityPlayerSPMixin",
+    "NetClientHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
