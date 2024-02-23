@@ -14,7 +14,7 @@ Link: https://discord.com/channels/1138825919088312403/1154171619967762462
 
 ## Current requirements
 
-- BTA 1.7.7.0_02
+- BTA
 - Babric
 - Halplibe
 
