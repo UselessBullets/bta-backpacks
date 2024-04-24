@@ -1,6 +1,5 @@
 package tosutosu.betterwithbackpacks.crafting;
 
-
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
@@ -11,7 +10,11 @@ import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Item;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
+import tosutosu.betterwithbackpacks.ModItems;
+import turniplabs.halplibe.helper.RecipeBuilder;
+import turniplabs.halplibe.helper.recipeBuilders.RecipeBuilderShaped;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
 public class ModRecipes implements RecipeEntrypoint {
@@ -27,6 +30,16 @@ public class ModRecipes implements RecipeEntrypoint {
         Registries.RECIPES.register("backpacks", BACKPACKS);
 
         if (!BetterWithBackpacks.ENABLE_BACKPACKS){return;}
-        DataLoader.loadRecipes("/assets/betterwithbackpacks/recipes/workbench.json");
+        RecipeBuilderShaped templateBackpack = new RecipeBuilderShaped(BetterWithBackpacks.MOD_ID, "AAA", "ABA", "AAA");
+        templateBackpack.addInput('A', Item.leather).addInput('B', "minecraft:chests").create("backpack_leather", new ItemStack(ModItems.LeatherBackpack, 1));
+        templateBackpack.addInput('A', Item.ingotIron).addInput('B', ModItems.LeatherBackpack).create("backpack_iron", new ItemStack(ModItems.IronBackpack, 1));
+        templateBackpack.addInput('A', Item.ingotGold).addInput('B', ModItems.IronBackpack).create("backpack_gold", new ItemStack(ModItems.GoldBackpack, 1));
+        templateBackpack.addInput('A', Item.diamond).addInput('B', ModItems.GoldBackpack).create("backpack_diamond", new ItemStack(ModItems.DiamondBackpack, 1));
+    }
+
+    @Override
+    public void initNamespaces() {
+        RecipeBuilder.initNameSpace(BetterWithBackpacks.MOD_ID);
+        RecipeBuilder.getRecipeNamespace(BetterWithBackpacks.MOD_ID);
     }
 }

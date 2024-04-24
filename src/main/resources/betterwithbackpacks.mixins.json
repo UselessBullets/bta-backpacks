@@ -5,11 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "EntityPlayerMixin",
-    "EntityPlayerMPMixin"
+    "EntityPlayerMPMixin",
+    "NetServerHandlerMixin",
   ],
   "client": [
     "EntityPlayerSPMixin",
-    "NetClientHandlerMixin"
+    "NetClientHandlerMixin",
   ],
   "injectors": {
     "defaultRequire": 1
