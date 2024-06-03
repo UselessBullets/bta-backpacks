@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.IPlayerDisplay;
 import tosutosu.betterwithbackpacks.gui.container.ContainerBackpack;
+import tosutosu.betterwithbackpacks.item.ItemBackpack;
 
 @Mixin(value = EntityPlayerMP.class, remap = false)
 public class EntityPlayerMPMixin implements IPlayerDisplay {
@@ -20,11 +21,13 @@ public class EntityPlayerMPMixin implements IPlayerDisplay {
     private int currentWindowId = 0;
     @Override
     public void displayGUIBackpack(ItemStack stack) {
-        getNextWindowId();
-        ContainerBackpack backpack = new ContainerBackpack(thisAs.inventory, stack);
-        thisAs.playerNetServerHandler.sendPacket(new Packet100OpenWindow(currentWindowId, BetterWithBackpacks.GUI_BACKPACK_ID, "Backpack", backpack.backpackInventory.getSizeInventory()));
-        thisAs.craftingInventory = backpack;
-        thisAs.craftingInventory.windowId = currentWindowId;
-        thisAs.craftingInventory.onContainerInit(thisAs);
+        if (stack != null && stack.getItem() instanceof ItemBackpack) {
+            getNextWindowId();
+            ContainerBackpack backpack = new ContainerBackpack(thisAs.inventory, stack);
+            thisAs.playerNetServerHandler.sendPacket(new Packet100OpenWindow(currentWindowId, BetterWithBackpacks.GUI_BACKPACK_ID, "Backpack", backpack.backpackInventory.getSizeInventory()));
+            thisAs.craftingInventory = backpack;
+            thisAs.craftingInventory.windowId = currentWindowId;
+            thisAs.craftingInventory.onContainerInit(thisAs);
+        }
     }
 }

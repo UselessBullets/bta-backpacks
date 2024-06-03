@@ -10,7 +10,7 @@
   ],
   "client": [
     "EntityPlayerSPMixin",
-    "NetClientHandlerMixin",
+    "NetClientHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

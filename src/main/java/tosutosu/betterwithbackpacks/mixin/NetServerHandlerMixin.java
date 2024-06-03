@@ -23,7 +23,7 @@ public abstract class NetServerHandlerMixin {
             ci.cancel();
             int len = packet.getPacketSize() - (packet.channel.length() + 4);
             CompoundTag tag = BackpacksClient.getStackUpdate(packet.data, len);
-            if (tag != null) {
+            if (playerEntity.inventory.getStackInSlot(playerEntity.inventory.currentItem) != null && tag != null) {
                 playerEntity.inventory.getStackInSlot(playerEntity.inventory.currentItem).setData(tag);
             }
         }

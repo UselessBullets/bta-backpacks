@@ -11,7 +11,7 @@ import tosutosu.betterwithbackpacks.BackpacksClient;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 
 public class ItemBackpackInventory implements IInventory {
-    private final ItemStack stack;
+    public final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
         assert stack.getItem() instanceof ItemBackpack;
@@ -72,10 +72,6 @@ public class ItemBackpackInventory implements IInventory {
     @Override
     public void onInventoryChanged() {
         writeToNBT(stack.getData());
-        if (!Global.isServer) {
-            BackpacksClient.sendStackUpdate(stack.getData());
-        }
-
     }
 
     public void readFromNBT(CompoundTag nbttagcompound) {

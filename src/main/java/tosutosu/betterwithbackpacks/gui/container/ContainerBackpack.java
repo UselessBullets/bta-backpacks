@@ -1,5 +1,6 @@
 package tosutosu.betterwithbackpacks.gui.container;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -8,6 +9,8 @@ import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import tosutosu.betterwithbackpacks.gui.slots.SlotBackpack;
 import tosutosu.betterwithbackpacks.item.ItemBackpackInventory;
+import tosutosu.betterwithbackpacks.item.ItemBackpack;
+import tosutosu.betterwithbackpacks.BackpacksClient;
 
 import java.util.List;
 
@@ -69,5 +72,21 @@ public class ContainerBackpack extends Container {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
         return backpackInventory.canInteractWith(entityPlayer);
+    }
+
+    @Override
+    public ItemStack clickInventorySlot(InventoryAction action, int[] args, EntityPlayer player) {
+        ItemStack is = super.clickInventorySlot(action, args, player);
+        if (player.world.isClientSide) {
+            backpackInventory.onInventoryChanged();
+            BackpacksClient.sendStackUpdate(backpackInventory.stack.getData());
+            if (player.getHeldItem() == null || !(player.getHeldItem().getItem() instanceof ItemBackpack)) {
+                // Good bye
+                Minecraft.getMinecraft(Minecraft.class).thePlayer.closeScreen();
+                return is;
+            }
+            player.getHeldItem().setData(backpackInventory.stack.getData());
+        }
+        return is;
     }
 }

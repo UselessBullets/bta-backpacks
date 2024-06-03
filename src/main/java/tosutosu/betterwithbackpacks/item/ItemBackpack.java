@@ -19,7 +19,7 @@ public class ItemBackpack extends Item{
     }
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if (!world.isClientSide && BetterWithBackpacks.ENABLE_BACKPACKS){
+        if (BetterWithBackpacks.ENABLE_BACKPACKS) {
             ((IPlayerDisplay) entityplayer).displayGUIBackpack(itemstack);
         }
         return itemstack;
