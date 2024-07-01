@@ -18,7 +18,7 @@ public class ItemBackpack extends Item{
         this.backpackSize = backpackSize;
     }
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if (BetterWithBackpacks.ENABLE_BACKPACKS) {
             ((IPlayerDisplay) entityplayer).displayGUIBackpack(itemstack);
         }

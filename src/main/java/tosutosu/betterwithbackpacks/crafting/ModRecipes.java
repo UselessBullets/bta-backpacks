@@ -21,6 +21,7 @@ public class ModRecipes implements RecipeEntrypoint {
     public static final RecipeNamespace BACKPACKS = new RecipeNamespace();
     public static final RecipeGroup<RecipeEntryCrafting<?, ?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
     public static final Registry<Class<? extends RecipeEntryBase<?, ?, ?>>> RECIPE_TYPES = new Registry<>();
+
     @Override
     public void onRecipesReady() {
         Registries.RECIPE_TYPES.register("backpacks:backpack", RecipeEntryBackpack.class);
@@ -31,10 +32,10 @@ public class ModRecipes implements RecipeEntrypoint {
 
         if (!BetterWithBackpacks.ENABLE_BACKPACKS){return;}
         RecipeBuilderShaped templateBackpack = new RecipeBuilderShaped(BetterWithBackpacks.MOD_ID, "AAA", "ABA", "AAA");
-        templateBackpack.addInput('A', Item.leather).addInput('B', "minecraft:chests").create("backpack_leather", new ItemStack(ModItems.LeatherBackpack, 1));
-        templateBackpack.addInput('A', Item.ingotIron).addInput('B', ModItems.LeatherBackpack).create("backpack_iron", new ItemStack(ModItems.IronBackpack, 1));
-        templateBackpack.addInput('A', Item.ingotGold).addInput('B', ModItems.IronBackpack).create("backpack_gold", new ItemStack(ModItems.GoldBackpack, 1));
-        templateBackpack.addInput('A', Item.diamond).addInput('B', ModItems.GoldBackpack).create("backpack_diamond", new ItemStack(ModItems.DiamondBackpack, 1));
+        templateBackpack.addInput('A', Item.leather).addInput('B', "minecraft:chests").create("backpack_leather", new ItemStack(ModItems.leatherBackpack, 1));
+        templateBackpack.addInput('A', Item.ingotIron).addInput('B', ModItems.leatherBackpack).create("backpack_iron", new ItemStack(ModItems.ironBackpack, 1));
+        templateBackpack.addInput('A', Item.ingotGold).addInput('B', ModItems.ironBackpack).create("backpack_gold", new ItemStack(ModItems.goldBackpack, 1));
+        templateBackpack.addInput('A', Item.diamond).addInput('B', ModItems.goldBackpack).create("backpack_diamond", new ItemStack(ModItems.diamondBackpack, 1));
     }
 
     @Override
