@@ -18,6 +18,7 @@ public class ContainerBackpack extends Container {
     private InventoryPlayer playerInv;
     private ItemStack backpack;
     public ItemBackpackInventory backpackInventory;
+
     public ContainerBackpack(InventoryPlayer playerInv, ItemStack backpack){
         this.playerInv = playerInv;
         this.backpack = backpack;
@@ -76,11 +77,19 @@ public class ContainerBackpack extends Container {
 
     @Override
     public ItemStack clickInventorySlot(InventoryAction action, int[] args, EntityPlayer player) {
+        int slotId = backpackInventory.getSizeInventory() + player.inventory.currentItem - 9;
+        if (player.inventory.currentItem < 9) slotId = backpackInventory.getSizeInventory() + player.inventory.currentItem + (9 * 3);
+        if (args != null && args.length >= 1 && args[0] == slotId) {
+            if (player.world.isClientSide) {
+                Minecraft.getMinecraft(Minecraft.class).thePlayer.closeScreen();
+            }
+            return player.getHeldItem();
+        }
         ItemStack is = super.clickInventorySlot(action, args, player);
         if (player.world.isClientSide) {
             backpackInventory.onInventoryChanged();
             BackpacksClient.sendStackUpdate(backpackInventory.stack.getData());
-            if (player.getHeldItem() == null || !(player.getHeldItem().getItem() instanceof ItemBackpack)) {
+            if (player.getHeldItem() == null) {
                 // Good bye
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.closeScreen();
                 return is;
