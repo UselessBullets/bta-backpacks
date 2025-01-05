@@ -6,7 +6,12 @@
   "name": "Better with Backpacks!",
   "description": "This mod aims to add simple backpacks to BTA.",
   "authors": [
-    "tosutosu, Useless"
+    "tosutosu",
+    "Useless"
+  ],
+  "contributors": [
+    "bigjango",
+    "graezero"
   ],
   "contact": {
     "homepage": "",
