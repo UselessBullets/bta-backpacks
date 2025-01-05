@@ -1,0 +1,130 @@
+[
+  {
+    "name": "backpacks:workbench/backpack_leather",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "AAA",
+      "ABA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.leather",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "group": "minecraft:chests"
+      }
+    ],
+    "result": {
+      "key": "item.betterwithbackpacks.backpack.leather",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "backpacks:workbench/backpack_iron",
+    "type": "backpacks:backpack",
+    "pattern": [
+      "AAA",
+      "ABA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.ingot.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.betterwithbackpacks.backpack.leather",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.betterwithbackpacks.backpack.iron",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "backpacks:workbench/backpack_gold",
+    "type": "backpacks:backpack",
+    "pattern": [
+      "AAA",
+      "ABA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.ingot.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.betterwithbackpacks.backpack.iron",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.betterwithbackpacks.backpack.gold",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "backpacks:workbench/backpack_diamond",
+    "type": "backpacks:backpack",
+    "pattern": [
+      "AAA",
+      "ABA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.diamond",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.betterwithbackpacks.backpack.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.betterwithbackpacks.backpack.diamond",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  }
+]

@@ -2,12 +2,16 @@ package tosutosu.betterwithbackpacks.item;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.minecraft.core.Global;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.InventorySorter;
+import tosutosu.betterwithbackpacks.BackpacksClient;
+import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 
 public class ItemBackpackInventory implements IInventory {
-    private final ItemStack stack;
+    public final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
         assert stack.getItem() instanceof ItemBackpack;
@@ -93,6 +97,25 @@ public class ItemBackpackInventory implements IInventory {
     }
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer) {
+        if (!BetterWithBackpacks.ENABLE_BACKPACKS){
+            return false;
+        }
+        if (entityPlayer.getHeldItem() == null){
+            return false;
+        }
+        ItemStack heldItem = entityPlayer.getHeldItem();
+        if (
+            heldItem.getItem() == stack.getItem() &&
+            heldItem.getMetadata() == stack.getMetadata() &&
+            heldItem.stackSize == stack.stackSize)
+        {
+            return true;
+        }
         return false;
+    }
+
+    @Override
+    public void sortInventory() {
+        InventorySorter.sortInventory(backpackItemStacks);
     }
 }

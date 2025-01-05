@@ -2,11 +2,16 @@
   "schemaVersion": 1,
   "id": "betterwithbackpacks",
   "version": "1.0.0",
-
+  "icon": "icon.png",
   "name": "Better with Backpacks!",
   "description": "This mod aims to add simple backpacks to BTA.",
   "authors": [
-    "tosutosu, Useless"
+    "tosutosu",
+    "Useless"
+  ],
+  "contributors": [
+    "bigjango",
+    "graezero"
   ],
   "contact": {
     "homepage": "",
@@ -17,8 +22,11 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "beforeGameStart": [
         "tosutosu.betterwithbackpacks.BetterWithBackpacks"
+    ],
+    "recipesReady": [
+      "tosutosu.betterwithbackpacks.crafting.ModRecipes"
     ]
   },
   "mixins": [
@@ -27,7 +35,7 @@
 
   "depends": {
     "fabricloader": ">=0.13.3",
-    "halplibe": ">=2.1.1"
+    "halplibe": ">=3.0.3"
   },
   "suggests": {
   }

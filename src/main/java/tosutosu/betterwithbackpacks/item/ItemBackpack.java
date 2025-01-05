@@ -1,11 +1,11 @@
 package tosutosu.betterwithbackpacks.item;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import tosutosu.betterwithbackpacks.gui.guiscreen.GuiBackpack;
+import tosutosu.betterwithbackpacks.BetterWithBackpacks;
+import tosutosu.betterwithbackpacks.IPlayerDisplay;
 
 public class ItemBackpack extends Item{
     public final int backpackSize;
@@ -18,9 +18,10 @@ public class ItemBackpack extends Item{
         this.backpackSize = backpackSize;
     }
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        Minecraft mc = Minecraft.getMinecraft(this);
-        mc.displayGuiScreen(new GuiBackpack(entityplayer, itemstack));
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+        if (BetterWithBackpacks.ENABLE_BACKPACKS) {
+            ((IPlayerDisplay) entityplayer).displayGUIBackpack(itemstack);
+        }
         return itemstack;
     }
 }
