@@ -1,9 +1,5 @@
 package tosutosu.betterwithbackpacks;
 
-import net.minecraft.core.Global;
-import net.minecraft.server.net.handler.NetServerHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
@@ -11,7 +7,6 @@ import java.util.Properties;
 
 public class BetterWithBackpacks implements GameStartEntrypoint {
     public static final String MOD_ID = "betterwithbackpacks";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static int GUI_LABEL_COLOR = 0x404040;
     public static int GUI_BACKPACK_ID;
     public static boolean ENABLE_BACKPACKS;
@@ -27,13 +22,6 @@ public class BetterWithBackpacks implements GameStartEntrypoint {
         config.updateConfig();
         ENABLE_BACKPACKS = config.getBoolean("enable_backpacks");
         GUI_BACKPACK_ID = config.getInt("gui_backpack_id");
-    }
-    public static void Log(String message){
-        if (Global.isServer && NetServerHandler.logger != null){
-            NetServerHandler.logger.info(message);
-        } else {
-            LOGGER.info(message);
-        }
     }
 
     @Override

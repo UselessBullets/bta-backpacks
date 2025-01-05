@@ -3,16 +3,15 @@ package tosutosu.betterwithbackpacks;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
-import java.util.Arrays;
-import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.net.packet.Packet250CustomPayload;
+import net.minecraft.core.net.packet.PacketCustomPayload;
 
 public class BackpacksClient {
     public static void sendStackUpdate(CompoundTag tag){
-        Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
-        if (!mc.theWorld.isClientSide) {return;}
+        Minecraft mc = Minecraft.getMinecraft();
+        if (!mc.currentWorld.isClientSide) {return;}
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {
             NbtIo.writeCompressed(tag, bos);
@@ -20,7 +19,7 @@ public class BackpacksClient {
             return;
         }
         byte[] buffer = bos.toByteArray();
-        mc.getSendQueue().addToSendQueue(new Packet250CustomPayload("backpacks$setItems", buffer));
+        mc.getSendQueue().addToSendQueue(new PacketCustomPayload("backpacks$setItems", buffer));
     }
 
     public static CompoundTag getStackUpdate(byte[] data, int len){

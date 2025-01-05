@@ -10,7 +10,7 @@ public class SlotBackpack extends Slot {
         super(inventory, id, x, y);
     }
     @Override
-    public boolean canPutStackInSlot(ItemStack itemstack) {
+    public boolean mayPlace(ItemStack itemstack) {
         return itemstack.getItem() != null && !(itemstack.getItem() instanceof ItemBackpack);
     }
 }

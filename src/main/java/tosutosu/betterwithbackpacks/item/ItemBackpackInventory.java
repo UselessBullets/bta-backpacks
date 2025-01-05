@@ -1,16 +1,14 @@
 package tosutosu.betterwithbackpacks.item;
 
-import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.ListTag;
-import net.minecraft.core.Global;
-import net.minecraft.core.entity.player.EntityPlayer;
+import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.ListTag;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventorySorter;
-import tosutosu.betterwithbackpacks.BackpacksClient;
+import net.minecraft.core.player.inventory.container.Container;
 import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 
-public class ItemBackpackInventory implements IInventory {
+public class ItemBackpackInventory implements Container {
     public final ItemStack stack;
     protected ItemStack[] backpackItemStacks;
     public ItemBackpackInventory(ItemStack stack){
@@ -21,17 +19,17 @@ public class ItemBackpackInventory implements IInventory {
         readFromNBT(stack.getData());
     }
     @Override
-    public int getSizeInventory(){
+    public int getContainerSize(){
         return backpackItemStacks.length;
     }
 
     @Override
-    public ItemStack getStackInSlot(int i) {
+    public ItemStack getItem(int i) {
         return backpackItemStacks[i];
     }
 
     @Override
-    public ItemStack decrStackSize(int i, int j) {
+    public ItemStack removeItem(int i, int j) {
         if (this.backpackItemStacks[i] != null) {
             if (this.backpackItemStacks[i].stackSize <= j) {
                 ItemStack itemstack = this.backpackItemStacks[i];
@@ -48,15 +46,15 @@ public class ItemBackpackInventory implements IInventory {
     }
 
     @Override
-    public void setInventorySlotContents(int i, ItemStack itemStack) {
+    public void setItem(int i, ItemStack itemStack) {
         this.backpackItemStacks[i] = itemStack;
-        if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
-            itemStack.stackSize = this.getInventoryStackLimit();
+        if (itemStack != null && itemStack.stackSize > this.getMaxStackSize()) {
+            itemStack.stackSize = this.getMaxStackSize();
         }
     }
 
     @Override
-    public String getInvName() {
+    public String getNameTranslationKey() {
         String name = stack.getCustomName();
         if (name != null){
             return name;
@@ -65,18 +63,18 @@ public class ItemBackpackInventory implements IInventory {
     }
 
     @Override
-    public int getInventoryStackLimit() {
+    public int getMaxStackSize() {
         return 64;
     }
 
     @Override
-    public void onInventoryChanged() {
+    public void setChanged() {
         writeToNBT(stack.getData());
     }
 
     public void readFromNBT(CompoundTag nbttagcompound) {
         ListTag nbttaglist = nbttagcompound.getList("Items");
-        this.backpackItemStacks = new ItemStack[this.getSizeInventory()];
+        this.backpackItemStacks = new ItemStack[this.getContainerSize()];
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
             CompoundTag nbttagcompound1 = (CompoundTag)nbttaglist.tagAt(i);
             byte byte0 = nbttagcompound1.getByte("Slot");
@@ -96,7 +94,7 @@ public class ItemBackpackInventory implements IInventory {
         nbttagcompound.put("Items", nbttaglist);
     }
     @Override
-    public boolean canInteractWith(EntityPlayer entityPlayer) {
+    public boolean stillValid(Player entityPlayer) {
         if (!BetterWithBackpacks.ENABLE_BACKPACKS){
             return false;
         }
@@ -115,7 +113,7 @@ public class ItemBackpackInventory implements IInventory {
     }
 
     @Override
-    public void sortInventory() {
+    public void sortContainer() {
         InventorySorter.sortInventory(backpackItemStacks);
     }
 }

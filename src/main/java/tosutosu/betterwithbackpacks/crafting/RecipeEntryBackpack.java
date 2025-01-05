@@ -1,12 +1,13 @@
 package tosutosu.betterwithbackpacks.crafting;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.data.registry.recipe.HasJsonAdapter;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.InventoryCrafting;
+import net.minecraft.core.player.inventory.container.ContainerCrafting;
+import net.minecraft.core.player.inventory.menu.MenuCrafting;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 
 public class RecipeEntryBackpack extends RecipeEntryCraftingShaped
@@ -25,14 +26,14 @@ public class RecipeEntryBackpack extends RecipeEntryCraftingShaped
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inventorycrafting) {
+    public ItemStack getCraftingResult(ContainerCrafting inventorycrafting) {
         if (getOutput() == null){
             return null;
         }
         ItemStack returnStack = new ItemStack(this.getOutput());
         CompoundTag backpackTag = returnStack.getData();
-        for (int i = 0; i < inventorycrafting.getSizeInventory(); ++i) {
-            ItemStack itemstack1 = inventorycrafting.getStackInSlot(i);
+        for (int i = 0; i < inventorycrafting.getContainerSize(); ++i) {
+            ItemStack itemstack1 = inventorycrafting.getItem(i);
             if (itemstack1 == null) continue;
             if (itemstack1.getItem() instanceof ItemBackpack){
                 backpackTag = itemstack1.getData();
