@@ -6,9 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import tosutosu.betterwithbackpacks.IPlayerDisplay;
 
 @Mixin(value = Player.class, remap = false)
-public class EntityPlayerMixin implements IPlayerDisplay {
+public class PlayerMixin implements IPlayerDisplay {
     @Override
-    public void displayGUIBackpack(ItemStack stack) {
+    public void bta_backpacks$displayGUIBackpack(final ItemStack stack) {
 
     }
 }

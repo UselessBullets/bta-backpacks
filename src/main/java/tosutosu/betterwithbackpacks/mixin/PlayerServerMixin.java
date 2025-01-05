@@ -12,7 +12,7 @@ import tosutosu.betterwithbackpacks.gui.container.ContainerBackpack;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 
 @Mixin(value = PlayerServer.class, remap = false)
-public class EntityPlayerMPMixin implements IPlayerDisplay {
+public class PlayerServerMixin implements IPlayerDisplay {
     @Unique
     private final PlayerServer thisAs = (PlayerServer)(Object)this;
     @Shadow
@@ -20,14 +20,14 @@ public class EntityPlayerMPMixin implements IPlayerDisplay {
     @Shadow
     private int currentWindowId = 0;
     @Override
-    public void displayGUIBackpack(ItemStack stack) {
+    public void bta_backpacks$displayGUIBackpack(final ItemStack stack) {
         if (stack != null && stack.getItem() instanceof ItemBackpack) {
             getNextWindowId();
-            ContainerBackpack backpack = new ContainerBackpack(thisAs.inventory, stack);
-            thisAs.playerNetServerHandler.sendPacket(new PacketContainerOpen(currentWindowId, BetterWithBackpacks.GUI_BACKPACK_ID, "Backpack", backpack.backpackInventory.getContainerSize()));
-            thisAs.craftingInventory = backpack;
-            thisAs.craftingInventory.containerId = currentWindowId;
-            thisAs.craftingInventory.addSlotListener(thisAs);
+            final ContainerBackpack backpack = new ContainerBackpack(this.thisAs.inventory, stack);
+            this.thisAs.playerNetServerHandler.sendPacket(new PacketContainerOpen(this.currentWindowId, BetterWithBackpacks.GUI_BACKPACK_ID, "Backpack", backpack.backpackInventory.getContainerSize()));
+            this.thisAs.craftingInventory = backpack;
+            this.thisAs.craftingInventory.containerId = this.currentWindowId;
+            this.thisAs.craftingInventory.addSlotListener(this.thisAs);
         }
     }
 }

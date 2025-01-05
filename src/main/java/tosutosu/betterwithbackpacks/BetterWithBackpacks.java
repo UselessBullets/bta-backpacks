@@ -12,11 +12,11 @@ public class BetterWithBackpacks implements GameStartEntrypoint {
     public static boolean ENABLE_BACKPACKS;
     public static int itemID;
     static {
-        Properties prop = new Properties();
+        final Properties prop = new Properties();
         prop.setProperty("starting_item_id","21370");
         prop.setProperty("gui_backpack_id","10");
         prop.setProperty("enable_backpacks", "true");
-        ConfigHandler config = new ConfigHandler(MOD_ID,prop);
+        final ConfigHandler config = new ConfigHandler(MOD_ID,prop);
         itemID = config.getInt("starting_item_id");
 
         config.updateConfig();

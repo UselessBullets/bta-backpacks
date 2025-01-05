@@ -9,15 +9,15 @@ import tosutosu.betterwithbackpacks.IPlayerDisplay;
 import tosutosu.betterwithbackpacks.gui.guiscreen.GuiBackpack;
 
 @Mixin(value = PlayerLocal.class, remap = false)
-public class EntityPlayerSPMixin implements IPlayerDisplay {
+public class PlayerLocalMixin implements IPlayerDisplay {
     @Unique
     private final Minecraft mc = Minecraft.getMinecraft();
     @Unique
     private final PlayerLocal thisAs = (PlayerLocal)(Object)this;
 
     @Override
-    public void displayGUIBackpack(ItemStack stack) {
-        mc.displayScreen(new GuiBackpack(thisAs, stack));
+    public void bta_backpacks$displayGUIBackpack(final ItemStack stack) {
+        this.mc.displayScreen(new GuiBackpack(this.thisAs, stack));
     }
 }
 

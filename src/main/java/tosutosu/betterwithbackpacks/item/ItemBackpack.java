@@ -9,18 +9,19 @@ import tosutosu.betterwithbackpacks.IPlayerDisplay;
 
 public class ItemBackpack extends Item{
     public final int backpackSize;
-    public ItemBackpack(String translationKey, String namespaceId, int id) {
+    public ItemBackpack(final String translationKey, final String namespaceId, final int id) {
         this(translationKey, namespaceId, id, 9);
     }
-    public ItemBackpack(String translationKey, String namespaceId, int id, int backpackSize) {
+    public ItemBackpack(final String translationKey, final String namespaceId, final int id, final int backpackSize) {
         super(translationKey, namespaceId, id);
         this.maxStackSize = 1;
         this.backpackSize = backpackSize;
     }
     @Override
-    public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
+    public ItemStack onUseItem(final ItemStack itemstack, final World world, final Player entityplayer) {
         if (BetterWithBackpacks.ENABLE_BACKPACKS) {
-            ((IPlayerDisplay) entityplayer).displayGUIBackpack(itemstack);
+            //noinspection CastToIncompatibleInterface
+            ((IPlayerDisplay) entityplayer).bta_backpacks$displayGUIBackpack(itemstack);
         }
         return itemstack;
     }

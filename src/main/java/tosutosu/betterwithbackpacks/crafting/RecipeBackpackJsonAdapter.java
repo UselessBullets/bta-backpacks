@@ -15,30 +15,32 @@ import net.minecraft.core.item.ItemStack;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RecipeBackpackJsonAdapter implements RecipeJsonAdapter<RecipeEntryBackpack> {
     @Override
-    public RecipeEntryBackpack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        JsonObject obj = json.getAsJsonObject();
-        List<String> pattern = obj.get("pattern").getAsJsonArray().asList().stream().map(JsonElement::getAsString).collect(Collectors.toList());
-        List<RecipeSymbol> symbols = obj.get("symbols").getAsJsonArray().asList().stream().map(E -> (RecipeSymbol)context.deserialize(E, RecipeSymbol.class)).collect(Collectors.toList());
-        ItemStack result = context.deserialize(obj.get("result").getAsJsonObject(), ItemStack.class);
-        boolean consumeContainers = obj.get("consumeContainers").getAsBoolean();
+    public RecipeEntryBackpack deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+        final JsonObject obj = json.getAsJsonObject();
+        final List<String> pattern = obj.get("pattern").getAsJsonArray().asList().stream().map(JsonElement::getAsString).collect(Collectors.toList());
+        final List<RecipeSymbol> symbols = obj.get("symbols").getAsJsonArray().asList().stream().map(E -> (RecipeSymbol)context.deserialize(E, RecipeSymbol.class)).collect(Collectors.toList());
+        final ItemStack result = context.deserialize(obj.get("result").getAsJsonObject(), ItemStack.class);
+        final boolean consumeContainers = obj.get("consumeContainers").getAsBoolean();
         return parseRecipe(pattern, symbols, result, consumeContainers);
     }
 
     @Override
-    public JsonElement serialize(RecipeEntryBackpack src, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject obj = new JsonObject();
+    public JsonElement serialize(final RecipeEntryBackpack src, final Type typeOfSrc, final JsonSerializationContext context) {
+        final JsonObject obj = new JsonObject();
         obj.addProperty("name", src.toString());
         obj.addProperty("type", Registries.RECIPE_TYPES.getKey(src.getClass()));
-        RecipeSymbol[] symbols = src.getInput();
-        StringBuilder sb = new StringBuilder();
-        for (RecipeSymbol recipeSymbol : symbols) {
+        final RecipeSymbol[] symbols = src.getInput();
+        final StringBuilder sb = new StringBuilder();
+        for (final RecipeSymbol recipeSymbol : symbols) {
             if (recipeSymbol == null) {
                 sb.append(" ");
                 continue;
@@ -49,17 +51,17 @@ public class RecipeBackpackJsonAdapter implements RecipeJsonAdapter<RecipeEntryB
             }
             sb.append(recipeSymbol.getSymbol());
         }
-        String s = sb.toString();
-        String[] pattern = s.split("(?<=\\G.{3})");
-        JsonArray arr = new JsonArray();
-        for (String string : pattern) {
+        final String s = sb.toString();
+        final String[] pattern = s.split("(?<=\\G.{3})");
+        final JsonArray arr = new JsonArray();
+        for (final String string : pattern) {
             arr.add(string);
         }
-        ArrayList<RecipeSymbol> arrayList = new ArrayList<RecipeSymbol>();
-        for (RecipeSymbol symbol : symbols) {
+        final Collection<RecipeSymbol> arrayList = new ArrayList<RecipeSymbol>();
+        for (final RecipeSymbol symbol : symbols) {
             if (symbol == null) continue;
             boolean found = false;
-            for (RecipeSymbol recipeSymbol : arrayList) {
+            for (final RecipeSymbol recipeSymbol : arrayList) {
                 if (recipeSymbol.getSymbol() != symbol.getSymbol()) continue;
                 found = true;
                 break;
@@ -73,17 +75,17 @@ public class RecipeBackpackJsonAdapter implements RecipeJsonAdapter<RecipeEntryB
         obj.addProperty("consumeContainers", src.consumeContainerItem);
         return obj;
     }
-    public static RecipeEntryBackpack parseRecipe(List<String> pattern, List<RecipeSymbol> symbols, ItemStack result, boolean consumeContainerItem) {
-        HashSet<Character> chars = new HashSet<Character>();
-        for (String s : pattern) {
-            char[] chars1 = s.toCharArray();
-            for (char c : chars1) {
+    public static RecipeEntryBackpack parseRecipe(final List<String> pattern, final Iterable<? extends RecipeSymbol> symbols, final ItemStack result, final boolean consumeContainerItem) {
+        final Collection<Character> chars = new HashSet<>();
+        for (final String s : pattern) {
+            final char[] chars1 = s.toCharArray();
+            for (final char c : chars1) {
                 chars.add(c);
             }
         }
-        ArrayList<Object> objs = new ArrayList<Object>();
-        block2: for (Character c : chars) {
-            for (RecipeSymbol symbol : symbols) {
+        final List<Object> objs = new ArrayList<Object>();
+        block2: for (final Character c : chars) {
+            for (final RecipeSymbol symbol : symbols) {
                 if (symbol.getSymbol() != c) continue;
                 objs.add(c);
                 objs.add(symbol);
@@ -93,33 +95,33 @@ public class RecipeBackpackJsonAdapter implements RecipeJsonAdapter<RecipeEntryB
         objs.add(0, pattern.toArray(new String[0]));
         return parseRecipe(result, consumeContainerItem, objs.toArray());
     }
-    public static RecipeEntryBackpack parseRecipe(ItemStack itemstack, boolean consumeContainerItem, Object ... aobj) {
+    public static RecipeEntryBackpack parseRecipe(final ItemStack itemstack, final boolean consumeContainerItem, final Object ... aobj) {
         StringBuilder s = new StringBuilder();
         int i = 0;
         int j = 0;
         int k = 0;
         if (aobj[i] instanceof String[]) {
-            for (String s2 : (String[])aobj[i++]) {
+            for (final String s2 : (String[])aobj[i++]) {
                 ++k;
                 j = s2.length();
                 s.append(s2);
             }
         } else {
             while (aobj[i] instanceof String) {
-                String s1 = (String)aobj[i++];
+                final String s1 = (String)aobj[i++];
                 ++k;
                 j = s1.length();
                 s = new StringBuilder(s + s1);
             }
         }
-        HashMap<Character, RecipeSymbol> map = new HashMap<Character, RecipeSymbol>();
+        final Map<Character, RecipeSymbol> map = new HashMap<Character, RecipeSymbol>();
         while (i < aobj.length) {
-            Character character = (Character)aobj[i];
+            final Character character = (Character)aobj[i];
             RecipeSymbol recipeSymbol = null;
             if (aobj[i + 1] instanceof Item) {
                 recipeSymbol = new RecipeSymbol(character, new ItemStack((Item)aobj[i + 1]), null);
             } else if (aobj[i + 1] instanceof Block) {
-                recipeSymbol = new RecipeSymbol(character, new ItemStack((Block)aobj[i + 1]), null);
+                recipeSymbol = new RecipeSymbol(character, new ItemStack((Block<?>)aobj[i + 1]), null);
             } else if (aobj[i + 1] instanceof ItemStack) {
                 recipeSymbol = new RecipeSymbol(character, (ItemStack)aobj[i + 1], null);
             }
@@ -132,9 +134,9 @@ public class RecipeBackpackJsonAdapter implements RecipeJsonAdapter<RecipeEntryB
             map.put(character, recipeSymbol);
             i += 2;
         }
-        RecipeSymbol[] symbols = new RecipeSymbol[j * k];
+        final RecipeSymbol[] symbols = new RecipeSymbol[j * k];
         for (int i1 = 0; i1 < j * k; ++i1) {
-            char c = s.charAt(i1);
+            final char c = s.charAt(i1);
             symbols[i1] = map.containsKey(c) ? map.get(c).copy() : null;
         }
         return new RecipeEntryBackpack(j, k, symbols, itemstack, consumeContainerItem);

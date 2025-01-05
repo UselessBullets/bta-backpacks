@@ -7,17 +7,16 @@ import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerCrafting;
-import net.minecraft.core.player.inventory.menu.MenuCrafting;
 import tosutosu.betterwithbackpacks.item.ItemBackpack;
 
 public class RecipeEntryBackpack extends RecipeEntryCraftingShaped
         implements HasJsonAdapter {
 
-    public RecipeEntryBackpack(int recipeWidth, int recipeHeight, RecipeSymbol[] input, ItemStack output) {
+    public RecipeEntryBackpack(final int recipeWidth, final int recipeHeight, final RecipeSymbol[] input, final ItemStack output) {
         super(recipeWidth, recipeHeight, input, output);
     }
 
-    public RecipeEntryBackpack(int recipeWidth, int recipeHeight, RecipeSymbol[] input, ItemStack output, boolean consumeContainerItem) {
+    public RecipeEntryBackpack(final int recipeWidth, final int recipeHeight, final RecipeSymbol[] input, final ItemStack output, final boolean consumeContainerItem) {
         super(recipeWidth, recipeHeight, input, output, consumeContainerItem);
     }
 
@@ -26,14 +25,14 @@ public class RecipeEntryBackpack extends RecipeEntryCraftingShaped
     }
 
     @Override
-    public ItemStack getCraftingResult(ContainerCrafting inventorycrafting) {
+    public ItemStack getCraftingResult(final ContainerCrafting inventorycrafting) {
         if (getOutput() == null){
             return null;
         }
-        ItemStack returnStack = new ItemStack(this.getOutput());
+        final ItemStack returnStack = new ItemStack(this.getOutput());
         CompoundTag backpackTag = returnStack.getData();
         for (int i = 0; i < inventorycrafting.getContainerSize(); ++i) {
-            ItemStack itemstack1 = inventorycrafting.getItem(i);
+            final ItemStack itemstack1 = inventorycrafting.getItem(i);
             if (itemstack1 == null) continue;
             if (itemstack1.getItem() instanceof ItemBackpack){
                 backpackTag = itemstack1.getData();

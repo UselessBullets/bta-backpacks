@@ -14,23 +14,20 @@ import tosutosu.betterwithbackpacks.BackpacksClient;
 import java.util.List;
 
 public class ContainerBackpack extends MenuAbstract {
-    private ContainerInventory playerInv;
-    private ItemStack backpack;
     public ItemBackpackInventory backpackInventory;
 
-    public ContainerBackpack(ContainerInventory playerInv, ItemStack backpack){
-        this.playerInv = playerInv;
-        this.backpack = backpack;
+    public ContainerBackpack(final ContainerInventory playerInv, final ItemStack backpack) {
+        super();
         this.backpackInventory = new ItemBackpackInventory(backpack);
-        int slotsNum = backpackInventory.getContainerSize();
-        int rows = (int) Math.ceil(slotsNum/9d);
+        final int slotsNum = this.backpackInventory.getContainerSize();
+        final int rows = (int) Math.ceil(slotsNum / 9d);
         for (int i = 0; i < rows; ++i) {
             int width = 9;
-            if (i == rows-1){
+            if (i == rows - 1) {
                 width = slotsNum - 9 * i;
             }
             for (int k = 0; k < width; ++k) {
-                this.addSlot(new SlotBackpack(backpackInventory, k + i * 9, 8 + k * 18, 18 + 18 * i));
+                this.addSlot(new SlotBackpack(this.backpackInventory, k + i * 9, 8 + k * 18, 18 + 18 * i));
             }
         }
         for (int i = 0; i < 3; ++i) {
@@ -43,8 +40,8 @@ public class ContainerBackpack extends MenuAbstract {
         }
     }
     @Override
-    public List<Integer> getMoveSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
-        int chestSize = backpackInventory.getContainerSize();
+    public List<Integer> getMoveSlots(final InventoryAction inventoryAction, final Slot slot, final int i, final Player entityPlayer) {
+        final int chestSize = this.backpackInventory.getContainerSize();
         if (slot.index >= 0 && slot.index < chestSize) {
             return this.getSlots(0, chestSize, false);
         }
@@ -61,8 +58,8 @@ public class ContainerBackpack extends MenuAbstract {
         return null;
     }
     @Override
-    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
-        int chestSize = backpackInventory.getContainerSize();
+    public List<Integer> getTargetSlots(final InventoryAction inventoryAction, final Slot slot, final int i, final Player entityPlayer) {
+        final int chestSize = this.backpackInventory.getContainerSize();
         if (slot.index < chestSize) {
             return this.getSlots(chestSize, 36, true);
         }
@@ -70,30 +67,31 @@ public class ContainerBackpack extends MenuAbstract {
     }
 
     @Override
-    public boolean stillValid(Player entityPlayer) {
-        return backpackInventory.stillValid(entityPlayer);
+    public boolean stillValid(final Player entityPlayer) {
+        return this.backpackInventory.stillValid(entityPlayer);
     }
 
     @Override
-    public ItemStack clicked(InventoryAction action, int[] args, Player player) {
-        int slotId = backpackInventory.getContainerSize() + player.inventory.getCurrentItemIndex() - 9;
-        if (player.inventory.getCurrentItemIndex() < 9) slotId = backpackInventory.getContainerSize() + player.inventory.getCurrentItemIndex() + (9 * 3);
+    public ItemStack clicked(final InventoryAction action, final int[] args, final Player player) {
+        int slotId = this.backpackInventory.getContainerSize() + player.inventory.getCurrentItemIndex() - 9;
+        if (player.inventory.getCurrentItemIndex() < 9) slotId = this.backpackInventory.getContainerSize() + player.inventory.getCurrentItemIndex() + (9 * 3);
+        assert player.world != null;
         if (args != null && args.length >= 1 && args[0] == slotId) {
             if (player.world.isClientSide) {
                 Minecraft.getMinecraft().thePlayer.closeScreen();
             }
             return player.getHeldItem();
         }
-        ItemStack is = super.clicked(action, args, player);
+        final ItemStack is = super.clicked(action, args, player);
         if (player.world.isClientSide) {
-            backpackInventory.setChanged();
-            BackpacksClient.sendStackUpdate(backpackInventory.stack.getData());
+            this.backpackInventory.setChanged();
+            BackpacksClient.sendStackUpdate(this.backpackInventory.stack.getData());
             if (player.getHeldItem() == null) {
                 // Good bye
                 Minecraft.getMinecraft().thePlayer.closeScreen();
                 return is;
             }
-            player.getHeldItem().setData(backpackInventory.stack.getData());
+            player.getHeldItem().setData(this.backpackInventory.stack.getData());
         }
         return is;
     }

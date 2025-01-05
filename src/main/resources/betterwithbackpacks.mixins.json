@@ -4,13 +4,13 @@
   "package": "tosutosu.betterwithbackpacks.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "EntityPlayerMixin",
-    "EntityPlayerMPMixin",
-    "NetServerHandlerMixin",
+    "PlayerMixin",
+    "PlayerServerMixin",
+    "PacketHandlerServerMixin"
   ],
   "client": [
-    "EntityPlayerSPMixin",
-    "NetClientHandlerMixin"
+    "PlayerLocalMixin",
+    "PacketHandlerClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

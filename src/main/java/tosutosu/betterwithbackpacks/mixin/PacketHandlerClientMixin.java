@@ -13,16 +13,17 @@ import tosutosu.betterwithbackpacks.BetterWithBackpacks;
 import tosutosu.betterwithbackpacks.IPlayerDisplay;
 
 @Mixin(value= PacketHandlerClient.class,remap = false)
-public abstract class NetClientHandlerMixin {
+public abstract class PacketHandlerClientMixin {
     @Final
     @Shadow
     private Minecraft mc;
 
     @Inject(method="handleOpenWindow", at=@At("TAIL"))
-    public void handleOpenWindow_injection(PacketContainerOpen packet, CallbackInfo ci) {
+    public void handleOpenWindow_injection(final PacketContainerOpen packet, final CallbackInfo ci) {
         if (packet.inventoryType == BetterWithBackpacks.GUI_BACKPACK_ID) {
-            ((IPlayerDisplay) (mc.thePlayer)).displayGUIBackpack(mc.thePlayer.getHeldItem());
-            mc.thePlayer.craftingInventory.containerId = packet.windowId;
+            //noinspection CastToIncompatibleInterface
+            ((IPlayerDisplay) (this.mc.thePlayer)).bta_backpacks$displayGUIBackpack(this.mc.thePlayer.getHeldItem());
+            this.mc.thePlayer.craftingInventory.containerId = packet.windowId;
         }
     }
 }
